@@ -1,0 +1,237 @@
+[gd_scene load_steps=19 format=3 uid="uid://cjbg1i1nva2eu"]
+
+[ext_resource type="Script" uid="uid://bajhxofytc8oh" path="res://minigame.gd" id="1_5gywx"]
+[ext_resource type="Script" uid="uid://bnrwmn7fm5ddw" path="res://minigames/find-fitzgerald/fitz_manager.gd" id="2_ejrfq"]
+[ext_resource type="Texture2D" uid="uid://ctgopal13akkf" path="res://minigames/find-fitzgerald/backgrounds/2026-06-22-22-28-47-333.jpg" id="2_j8sfd"]
+[ext_resource type="Texture2D" uid="uid://c8kvy600x6v5b" path="res://minigames/find-fitzgerald/backgrounds/IMG_6209.jpg" id="3_cr0tq"]
+[ext_resource type="Texture2D" uid="uid://b37s5wo1vq1ip" path="res://minigames/find-fitzgerald/backgrounds/PXL_20260815_212052553.jpg" id="4_ejrfq"]
+[ext_resource type="Script" uid="uid://bem8wk5lryh5p" path="res://minigames/find-fitzgerald/fitz_node.gd" id="5_pqj1b"]
+[ext_resource type="Texture2D" uid="uid://dytsjw3jw8qmw" path="res://minigames/find-fitzgerald/fitzgerald.png" id="6_axsdt"]
+[ext_resource type="Script" uid="uid://cs1cka3qnkxl" path="res://utils/beat_sprite_2d.gd" id="6_pqj1b"]
+[ext_resource type="AudioStream" uid="uid://dwrn15ar27fgy" path="res://minigames/find-fitzgerald/frog-croak.wav" id="7_cr0tq"]
+[ext_resource type="Script" uid="uid://cl0chkb5sjd38" path="res://minigames/find-fitzgerald/cursor_area.gd" id="10_axsdt"]
+[ext_resource type="Texture2D" uid="uid://bdw03mjejk4fe" path="res://minigames/find-fitzgerald/backgrounds/IMG_20260506_140209258.jpg" id="10_xaqaf"]
+[ext_resource type="Texture2D" uid="uid://b73upo1hcs5mb" path="res://minigames/find-fitzgerald/backgrounds/20260506_204637.jpg" id="11_h1fbk"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xdhec"]
+radius = 37.84892
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_axsdt"]
+radius = 40.82224
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xaqaf"]
+radius = 112.697266
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_h1fbk"]
+radius = 38.326138
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0hkhm"]
+radius = 37.7807
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_pqj1b"]
+radius = 17.117243
+
+[node name="FindFitzgerald" type="Node"]
+script = ExtResource("1_5gywx")
+title = "Find Fitzgeral"
+duration = 7
+mouse = 2
+
+[node name="GameManager" type="Node" parent="." node_paths=PackedStringArray("levels")]
+script = ExtResource("2_ejrfq")
+levels = [NodePath("Level1"), NodePath("Level2"), NodePath("Level3"), NodePath("Level4"), NodePath("Level5")]
+
+[node name="Level1" type="Node2D" parent="GameManager"]
+visible = false
+
+[node name="Background" type="Sprite2D" parent="GameManager/Level1"]
+scale = Vector2(0.24000007, 0.24000001)
+texture = ExtResource("2_j8sfd")
+centered = false
+
+[node name="FitzRoot" type="Node2D" parent="GameManager/Level1" node_paths=PackedStringArray("frog_sound") groups=["fitz"]]
+position = Vector2(41, 82.99999)
+scale = Vector2(0.7166198, 0.7166198)
+script = ExtResource("5_pqj1b")
+frog_sound = NodePath("FrogSoundPlayer")
+
+[node name="BeatSprite2D" type="Sprite2D" parent="GameManager/Level1/FitzRoot"]
+position = Vector2(3.8146973e-06, 0)
+scale = Vector2(1.0000001, 1.0000001)
+texture = ExtResource("6_axsdt")
+script = ExtResource("6_pqj1b")
+beat_position_add = Vector2(0, -10)
+beat_scale_target = Vector2(1.05, 1.05)
+metadata/_custom_type_script = "uid://cs1cka3qnkxl"
+
+[node name="ClickDetection" type="Area2D" parent="GameManager/Level1/FitzRoot"]
+collision_layer = 0
+collision_mask = 8388608
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GameManager/Level1/FitzRoot/ClickDetection"]
+position = Vector2(0, 5)
+shape = SubResource("CircleShape2D_xdhec")
+
+[node name="FrogSoundPlayer" type="AudioStreamPlayer" parent="GameManager/Level1/FitzRoot"]
+stream = ExtResource("7_cr0tq")
+
+[node name="Level2" type="Node2D" parent="GameManager"]
+visible = false
+
+[node name="Background" type="Sprite2D" parent="GameManager/Level2"]
+position = Vector2(0, -255)
+scale = Vector2(0.44444445, 0.44444448)
+texture = ExtResource("3_cr0tq")
+centered = false
+
+[node name="FitzRoot" type="Node2D" parent="GameManager/Level2" node_paths=PackedStringArray("frog_sound") groups=["fitz"]]
+position = Vector2(423.99988, 480.99997)
+scale = Vector2(0.34555456, 0.34555456)
+script = ExtResource("5_pqj1b")
+frog_sound = NodePath("FrogSoundPlayer")
+
+[node name="BeatSprite2D" type="Sprite2D" parent="GameManager/Level2/FitzRoot"]
+scale = Vector2(1.0000001, 1.0000001)
+texture = ExtResource("6_axsdt")
+script = ExtResource("6_pqj1b")
+beat_position_add = Vector2(0, -10)
+beat_scale_target = Vector2(1.05, 1.05)
+metadata/_custom_type_script = "uid://cs1cka3qnkxl"
+
+[node name="ClickDetection" type="Area2D" parent="GameManager/Level2/FitzRoot"]
+collision_layer = 0
+collision_mask = 8388608
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GameManager/Level2/FitzRoot/ClickDetection"]
+position = Vector2(0, 5)
+shape = SubResource("CircleShape2D_axsdt")
+
+[node name="FrogSoundPlayer" type="AudioStreamPlayer" parent="GameManager/Level2/FitzRoot"]
+stream = ExtResource("7_cr0tq")
+
+[node name="Level3" type="Node2D" parent="GameManager"]
+visible = false
+
+[node name="Background" type="Sprite2D" parent="GameManager/Level3"]
+scale = Vector2(0.23809524, 0.23809524)
+texture = ExtResource("4_ejrfq")
+centered = false
+
+[node name="FitzRoot" type="Node2D" parent="GameManager/Level3" node_paths=PackedStringArray("frog_sound") groups=["fitz"]]
+position = Vector2(938.99994, 478.99997)
+scale = Vector2(0.10726973, 0.10726973)
+script = ExtResource("5_pqj1b")
+frog_sound = NodePath("FrogSoundPlayer")
+
+[node name="BeatSprite2D" type="Sprite2D" parent="GameManager/Level3/FitzRoot"]
+scale = Vector2(2.8938997, 2.8938997)
+texture = ExtResource("6_axsdt")
+script = ExtResource("6_pqj1b")
+beat_position_add = Vector2(0, -10)
+beat_scale_target = Vector2(1.05, 1.05)
+metadata/_custom_type_script = "uid://cs1cka3qnkxl"
+
+[node name="ClickDetection" type="Area2D" parent="GameManager/Level3/FitzRoot"]
+collision_layer = 0
+collision_mask = 8388608
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GameManager/Level3/FitzRoot/ClickDetection"]
+position = Vector2(0, 5)
+shape = SubResource("CircleShape2D_xaqaf")
+
+[node name="FrogSoundPlayer" type="AudioStreamPlayer" parent="GameManager/Level3/FitzRoot"]
+stream = ExtResource("7_cr0tq")
+
+[node name="Level4" type="Node2D" parent="GameManager"]
+visible = false
+
+[node name="Background" type="Sprite2D" parent="GameManager/Level4"]
+position = Vector2(0, -334)
+scale = Vector2(0.31249997, 0.3125)
+texture = ExtResource("10_xaqaf")
+centered = false
+
+[node name="FitzRoot" type="Node2D" parent="GameManager/Level4" node_paths=PackedStringArray("frog_sound") groups=["fitz"]]
+position = Vector2(487.00006, 32)
+scale = Vector2(1.1480594, 1.1480594)
+script = ExtResource("5_pqj1b")
+frog_sound = NodePath("FrogSoundPlayer")
+
+[node name="BeatSprite2D" type="Sprite2D" parent="GameManager/Level4/FitzRoot"]
+texture = ExtResource("6_axsdt")
+script = ExtResource("6_pqj1b")
+beat_position_add = Vector2(0, -10)
+beat_scale_target = Vector2(1.05, 1.05)
+metadata/_custom_type_script = "uid://cs1cka3qnkxl"
+
+[node name="ClickDetection" type="Area2D" parent="GameManager/Level4/FitzRoot"]
+collision_layer = 0
+collision_mask = 8388608
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GameManager/Level4/FitzRoot/ClickDetection"]
+position = Vector2(4.355122, 4.355177)
+shape = SubResource("CircleShape2D_h1fbk")
+
+[node name="FrogSoundPlayer" type="AudioStreamPlayer" parent="GameManager/Level4/FitzRoot"]
+stream = ExtResource("7_cr0tq")
+
+[node name="Level5" type="Node2D" parent="GameManager"]
+
+[node name="Background" type="Sprite2D" parent="GameManager/Level5"]
+scale = Vector2(0.23255812, 0.23255812)
+texture = ExtResource("11_h1fbk")
+centered = false
+
+[node name="FitzRoot" type="Node2D" parent="GameManager/Level5" node_paths=PackedStringArray("frog_sound") groups=["fitz"]]
+position = Vector2(667, 479.00003)
+scale = Vector2(1.222818, 1.222818)
+script = ExtResource("5_pqj1b")
+frog_sound = NodePath("FrogSoundPlayer")
+
+[node name="BeatSprite2D" type="Sprite2D" parent="GameManager/Level5/FitzRoot"]
+texture = ExtResource("6_axsdt")
+flip_h = true
+script = ExtResource("6_pqj1b")
+beat_position_add = Vector2(0, -10)
+beat_scale_target = Vector2(1.05, 1.05)
+metadata/_custom_type_script = "uid://cs1cka3qnkxl"
+
+[node name="ClickDetection" type="Area2D" parent="GameManager/Level5/FitzRoot"]
+collision_layer = 0
+collision_mask = 8388608
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GameManager/Level5/FitzRoot/ClickDetection"]
+position = Vector2(0, 5)
+shape = SubResource("CircleShape2D_0hkhm")
+
+[node name="FrogSoundPlayer" type="AudioStreamPlayer" parent="GameManager/Level5/FitzRoot"]
+stream = ExtResource("7_cr0tq")
+
+[node name="ColorRect" type="ColorRect" parent="GameManager/Level5"]
+offset_left = 680.0
+offset_top = 543.0
+offset_right = 757.0
+offset_bottom = 558.0
+color = Color(0.6509804, 0.45490196, 0.11372549, 1)
+
+[node name="Label" type="Label" parent="GameManager/Level5"]
+offset_left = 667.0
+offset_top = 538.0
+offset_right = 761.0
+offset_bottom = 561.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "FITZGERALD"
+
+[node name="CursorArea" type="Area2D" parent="."]
+collision_layer = 8388608
+collision_mask = 0
+monitoring = false
+script = ExtResource("10_axsdt")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CursorArea"]
+shape = SubResource("CircleShape2D_pqj1b")
